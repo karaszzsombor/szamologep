@@ -24,7 +24,6 @@ namespace szamologep
 
         private void GombokElhelyezese()
         {
-            int a = 0;
             for(int i = 0; i < 4; i++)
             {
                 btn_grid.RowDefinitions.Add(new RowDefinition());
@@ -116,34 +115,41 @@ namespace szamologep
 
                 if (txb_screen.Text.Contains("*"))
                 {
-                    int szorzas_index = txb_screen.Text.LastIndexOf('*');
-
-                    int a = szorzas_index + 1;
-                    while (a < txb_screen.Text.Length && char.IsDigit(txb_screen.Text[a])) //szorzás utáni szám
+                    while (txb_screen.Text.Contains("*"))
                     {
-                        num1 = num1 * 10 + (txb_screen.Text[a] - '0');
-                        a++;
+                        num1 = 0;
+                        num2 = 0;
+                        num3 = 0;
+
+                        int szorzas_index = txb_screen.Text.LastIndexOf('*');
+
+                        int a = szorzas_index + 1;
+                        while (a < txb_screen.Text.Length && char.IsDigit(txb_screen.Text[a])) //szorzás utáni szám
+                        {
+                            num1 = num1 * 10 + (txb_screen.Text[a] - '0');
+                            a++;
+                        }
+
+                        int b = szorzas_index - 1;
+                        while (b >= 0 && char.IsDigit(txb_screen.Text[b])) //szorzás előtti szám
+                        {
+                            num2 = num2 * 10 + (txb_screen.Text[b] - '0');
+                            b--;
+                        }
+                        string cucc = Convert.ToString(num2);
+                        cucc.Reverse();
+                        num2 = Int32.Parse(cucc);
+
+                        num3 = num1 * num2;
+
+                        int rightLen = Convert.ToString(num1).Length;
+                        int leftLen = Convert.ToString(num2).Length;
+                        int start = szorzas_index - leftLen;
+                        int length = leftLen + 1 + rightLen;
+                        txb_screen.Text = txb_screen.Text.Substring(0, start) + num3 + txb_screen.Text.Substring(start + length);
+
                     }
-
-                    int b = szorzas_index - 1;
-                    while (b >= 0 && char.IsDigit(txb_screen.Text[b])) //szorzás előtti szám
-                    {
-                        num2 = num2 * 10 + (txb_screen.Text[b] - '0');
-                        b--;
-                    }
-                    string cucc = Convert.ToString(num2);
-                    cucc.Reverse();
-                    num2 = Int32.Parse(cucc);
-
-                    num3 = num1 * num2;
-
-                    int rightLen = Convert.ToString(num1).Length;
-                    int leftLen = Convert.ToString(num2).Length;
-                    int start = szorzas_index - leftLen;
-                    int length = leftLen + 1 + rightLen;
-                    txb_screen.Text = txb_screen.Text.Substring(0, start) + num3 + txb_screen.Text.Substring(start + length);
                 }
-
             }
         }
     }
