@@ -143,6 +143,7 @@ namespace szamologep
                     int length = leftLen + 1 + rightLen;
                     txb_screen.Text = txb_screen.Text.Substring(0, start) + num3 + txb_screen.Text.Substring(start + length);
                 }
+
             }
         }
     }
