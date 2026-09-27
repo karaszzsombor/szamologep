@@ -184,6 +184,46 @@ namespace szamologep
 
                     }
                 }
+                if (txb_screen.Text.Contains("-"))
+                {
+                    while (txb_screen.Text.Contains("-"))
+                    {
+                        num1 = 0;
+                        num2 = 0;
+                        num3 = 0;
+
+                        int kivonas_index = txb_screen.Text.LastIndexOf('-');
+                        if (kivonas_index == 0)
+                        {
+                            break;
+                        }
+
+
+                        int a = kivonas_index + 1;
+                        while (a < txb_screen.Text.Length && (char.IsDigit(txb_screen.Text[a]) || txb_screen.Text[a] == '.')) //osztás utáni szám
+                        {
+                            a++;
+                        }
+                        num1 = Double.Parse(txb_screen.Text.Substring(kivonas_index + 1, a - kivonas_index - 1));
+
+
+                        int b = kivonas_index - 1;
+
+                        while (b >= 0 && (char.IsDigit(txb_screen.Text[b]) || txb_screen.Text[b] == '.')) //osztás előtti szám
+                        {
+                            b--;
+                        }
+                        num2 = Double.Parse(txb_screen.Text.Substring(b + 1, kivonas_index - 1 - b));
+
+                        num3 = num2 - num1;
+
+                        int rightLen = Convert.ToString(num1).Length;
+                        int leftLen = Convert.ToString(num2).Length;
+                        int start = kivonas_index - leftLen;
+                        int length = leftLen + 1 + rightLen;
+                        txb_screen.Text = txb_screen.Text.Substring(0, start) + num3 + txb_screen.Text.Substring(start + length);
+                    }
+                }
             }
         }
     }
