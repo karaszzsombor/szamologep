@@ -107,11 +107,11 @@ namespace szamologep
             {
                 if ("+-*/".Contains(txb_screen.Text.Last()))
                 {
-                    MessageBox.Show("bazi nagy error LMFAO", "", MessageBoxButton.AbortRetryIgnore);
+                    MessageBox.Show("NAGY KEREK ERROR LMFAO", "", MessageBoxButton.AbortRetryIgnore, MessageBoxImage.Error);
                 }
-                    int num1 = 0;
-                    int num2 = 0;
-                    int num3 = 0;
+                    double num1 = 0;
+                    double num2 = 0;
+                    double num3 = 0;
 
                 if (txb_screen.Text.Contains("*"))
                 {
@@ -124,27 +124,61 @@ namespace szamologep
                         int szorzas_index = txb_screen.Text.LastIndexOf('*');
 
                         int a = szorzas_index + 1;
-                        while (a < txb_screen.Text.Length && char.IsDigit(txb_screen.Text[a])) //szorzás utáni szám
+                        while (a < txb_screen.Text.Length && (char.IsDigit(txb_screen.Text[a]) || txb_screen.Text[a]=='.')) //szorzás utáni szám
                         {
-                            num1 = num1 * 10 + (txb_screen.Text[a] - '0');
                             a++;
                         }
+                        num1 = Double.Parse(txb_screen.Text.Substring(szorzas_index+1, a-szorzas_index-1));
+
 
                         int b = szorzas_index - 1;
-                        while (b >= 0 && char.IsDigit(txb_screen.Text[b])) //szorzás előtti szám
+                        while (b >= 0 && (char.IsDigit(txb_screen.Text[b]) || txb_screen.Text[b]=='.')) //szorzás előtti szám
                         {
-                            num2 = num2 * 10 + (txb_screen.Text[b] - '0');
                             b--;
                         }
-                        string cucc = Convert.ToString(num2);
-                        cucc.Reverse();
-                        num2 = Int32.Parse(cucc);
+                        num2 = Double.Parse(txb_screen.Text.Substring(b + 1, szorzas_index - 1 - b));
 
                         num3 = num1 * num2;
 
                         int rightLen = Convert.ToString(num1).Length;
                         int leftLen = Convert.ToString(num2).Length;
                         int start = szorzas_index - leftLen;
+                        int length = leftLen + 1 + rightLen;
+                        txb_screen.Text = txb_screen.Text.Substring(0, start) + num3 + txb_screen.Text.Substring(start + length);
+
+                    }
+                }
+                if (txb_screen.Text.Contains("/"))
+                {
+                    while (txb_screen.Text.Contains("/"))
+                    {
+                        num1 = 0;
+                        num2 = 0;
+                        num3 = 0;
+
+                        int osztas_index = txb_screen.Text.LastIndexOf('/');
+
+                        int a = osztas_index + 1;
+                        while (a < txb_screen.Text.Length && (char.IsDigit(txb_screen.Text[a]) || txb_screen.Text[a] == '.')) //osztás utáni szám
+                        {
+                            a++;
+                        }
+                        num1 = Double.Parse(txb_screen.Text.Substring(osztas_index+1, a-osztas_index-1));
+
+
+                        int b = osztas_index - 1;
+                        
+                        while (b >= 0 && (char.IsDigit(txb_screen.Text[b]) || txb_screen.Text[b] == '.')) //osztás előtti szám
+                        {
+                            b--;
+                        }
+                        num2 = Double.Parse(txb_screen.Text.Substring(b+1, osztas_index-1 - b));
+
+                        num3 = num2 / num1;
+
+                        int rightLen = Convert.ToString(num1).Length;
+                        int leftLen = Convert.ToString(num2).Length;
+                        int start = osztas_index - leftLen;
                         int length = leftLen + 1 + rightLen;
                         txb_screen.Text = txb_screen.Text.Substring(0, start) + num3 + txb_screen.Text.Substring(start + length);
 
