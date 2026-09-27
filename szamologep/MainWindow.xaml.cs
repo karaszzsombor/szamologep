@@ -107,7 +107,7 @@ namespace szamologep
             {
                 if ("+-*/".Contains(txb_screen.Text.Last()))
                 {
-                    MessageBox.Show("NAGY KEREK ERROR LMFAO", "", MessageBoxButton.AbortRetryIgnore, MessageBoxImage.Error);
+                    MessageBox.Show("a művelet végére kérlek számot írj", "", MessageBoxButton.AbortRetryIgnore, MessageBoxImage.Error);
                 }
                     double num1 = 0;
                     double num2 = 0;
