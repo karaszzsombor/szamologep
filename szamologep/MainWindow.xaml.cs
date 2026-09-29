@@ -113,8 +113,7 @@ namespace szamologep
                     double num2 = 0;
                     double num3 = 0;
 
-                if (txb_screen.Text.Contains("*"))
-                {
+
                     while (txb_screen.Text.Contains("*"))
                     {
                         num1 = 0;
@@ -147,9 +146,6 @@ namespace szamologep
                         txb_screen.Text = txb_screen.Text.Substring(0, start) + num3 + txb_screen.Text.Substring(start + length);
 
                     }
-                }
-                if (txb_screen.Text.Contains("/"))
-                {
                     while (txb_screen.Text.Contains("/"))
                     {
                         num1 = 0;
@@ -183,9 +179,6 @@ namespace szamologep
                         txb_screen.Text = txb_screen.Text.Substring(0, start) + num3 + txb_screen.Text.Substring(start + length);
 
                     }
-                }
-                if (txb_screen.Text.Contains("-"))
-                {
                     while (txb_screen.Text.Contains("-"))
                     {
                         num1 = 0;
@@ -223,9 +216,6 @@ namespace szamologep
                         int length = leftLen + 1 + rightLen;
                         txb_screen.Text = txb_screen.Text.Substring(0, start) + num3 + txb_screen.Text.Substring(start + length);
                     }
-                }
-                if (txb_screen.Text.Contains("+"))
-                {
                     while (txb_screen.Text.Contains("+"))
                     {
                         num1 = 0;
@@ -258,7 +248,6 @@ namespace szamologep
                         int length = leftLen + 1 + rightLen;
                         txb_screen.Text = txb_screen.Text.Substring(0, start) + num3 + txb_screen.Text.Substring(start + length);
                     }
-                }
             }
         }
     }
